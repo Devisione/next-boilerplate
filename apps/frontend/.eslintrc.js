@@ -39,5 +39,38 @@ module.exports = {
     "import/no-default-export": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "unicorn/filename-case": "off",
+
+    "no-restricted-imports": [
+      "error",
+      {
+        patterns: [
+          {
+            group: ["@domains/[a-zA-Z]*/**"],
+            message:
+              "File not exposed from the module. Consider exporting it from an index",
+          },
+          {
+            group: ["**/domains/**"],
+            message:
+              "No need to use relative imports, use aliases instead - @domains",
+          },
+          {
+            group: ["**/shared/**"],
+            message:
+              "No need to use relative imports, use aliases instead - @shared",
+          },
+          {
+            group: ["**/entities/**"],
+            message:
+              "No need to use relative imports, use aliases instead - @entities",
+          },
+          {
+            group: ["**/features/**"],
+            message:
+              "No need to use relative imports, use aliases instead - @features",
+          },
+        ],
+      },
+    ],
   },
 };

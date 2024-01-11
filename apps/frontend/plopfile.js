@@ -1,29 +1,40 @@
 const segmentGenerator = (path) => [
   // config
   {
+    key: "config",
     type: "add",
     path: `${path}/config/constants/index.ts`,
     templateFile: ".plop/templates/segment/config/constants/index.js.hbs",
   },
   // lib
   {
+    key: "lib",
     type: "add",
     path: `${path}/lib/utils/index.ts`,
     templateFile: ".plop/templates/segment/lib/utils/index.js.hbs",
   },
   // model
   {
+    key: "model",
     type: "add",
     path: `${path}/model/store/index.ts`,
     templateFile: ".plop/templates/segment/model/store/index.js.hbs",
   },
   {
+    key: "model",
     type: "add",
     path: `${path}/model/api/index.ts`,
     templateFile: ".plop/templates/segment/model/api/index.js.hbs",
   },
+  {
+    key: "model",
+    type: "add",
+    path: `${path}/model/types/index.ts`,
+    templateFile: ".plop/templates/segment/model/types/index.js.hbs",
+  },
   // ui
   {
+    key: "ui",
     type: "add",
     path: `${path}/ui/index.tsx`,
     templateFile: ".plop/templates/segment/ui/index.js.hbs",
@@ -101,5 +112,18 @@ module.exports = (plop) => {
       },
       ...segmentGenerator("src/features/{{pascalCase name}}"),
     ],
+  });
+  plop.setGenerator("service", {
+    description: "Create a service",
+    prompts: [
+      {
+        type: "input",
+        name: "name",
+        message: "What is your service name?",
+      },
+    ],
+    actions: [...segmentGenerator("src/service/{{pascalCase name}}")].filter(
+      ({ key }) => key !== "ui",
+    ),
   });
 };
