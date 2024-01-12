@@ -131,4 +131,41 @@ module.exports = (plop) => {
       ({ key }) => key !== "ui" && key !== "api",
     ),
   });
+  plop.setGenerator("api request", {
+    description: "Create a service",
+    prompts: [
+      {
+        type: "input",
+        name: "entities_name",
+        message: "What is your entities name?",
+      },
+      {
+        type: "input",
+        name: "api_name",
+        message: "What is your api name name?",
+      },
+    ],
+    actions: [
+      {
+        type: "add",
+        path: `src/entities/{{pascalCase entities_name}}/api/{{camelCase api_name}}/index.ts`,
+        templateFile: ".plop/templates/api/index.js.hbs",
+      },
+      {
+        type: "add",
+        path: `src/entities/{{pascalCase entities_name}}/api/{{camelCase api_name}}/input.dto.ts`,
+        templateFile: ".plop/templates/api/input.js.hbs",
+      },
+      {
+        type: "add",
+        path: `src/entities/{{pascalCase entities_name}}/api/{{camelCase api_name}}/output.dto.ts`,
+        templateFile: ".plop/templates/api/output.js.hbs",
+      },
+      {
+        type: "add",
+        path: `src/entities/{{pascalCase entities_name}}/api/{{camelCase api_name}}/transform.ts`,
+        templateFile: ".plop/templates/api/transform.js.hbs",
+      },
+    ],
+  });
 };

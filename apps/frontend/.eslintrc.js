@@ -41,6 +41,8 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "off",
     "unicorn/filename-case": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-interface": "off",
     "react/function-component-definition": [
       "error",
       { namedComponents: "arrow-function" },
