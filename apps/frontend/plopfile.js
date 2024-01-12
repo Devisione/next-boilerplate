@@ -23,12 +23,6 @@ const segmentGenerator = (path) => [
   {
     key: "model",
     type: "add",
-    path: `${path}/model/api/index.ts`,
-    templateFile: ".plop/templates/segment/model/api/index.js.hbs",
-  },
-  {
-    key: "model",
-    type: "add",
     path: `${path}/model/types/index.ts`,
     templateFile: ".plop/templates/segment/model/types/index.js.hbs",
   },
@@ -38,6 +32,13 @@ const segmentGenerator = (path) => [
     type: "add",
     path: `${path}/ui/index.tsx`,
     templateFile: ".plop/templates/segment/ui/index.js.hbs",
+  },
+  // api
+  {
+    key: "api",
+    type: "add",
+    path: `${path}/api/index.ts`,
+    templateFile: ".plop/templates/segment/api/index.js.hbs",
   },
 ];
 
@@ -58,7 +59,9 @@ module.exports = (plop) => {
         path: "src/screens/{{pascalCase name}}/index.tsx",
         templateFile: ".plop/templates/screen/index.js.hbs",
       },
-      ...segmentGenerator("src/screens/{{pascalCase name}}"),
+      ...segmentGenerator("src/screens/{{pascalCase name}}").filter(
+        ({ key }) => key !== "api",
+      ),
     ],
   });
   plop.setGenerator("entities", {
@@ -110,7 +113,9 @@ module.exports = (plop) => {
         path: "src/features/{{pascalCase name}}/index.tsx",
         templateFile: ".plop/templates/feature/index.js.hbs",
       },
-      ...segmentGenerator("src/features/{{pascalCase name}}"),
+      ...segmentGenerator("src/features/{{pascalCase name}}").filter(
+        ({ key }) => key !== "api",
+      ),
     ],
   });
   plop.setGenerator("service", {
@@ -123,7 +128,7 @@ module.exports = (plop) => {
       },
     ],
     actions: [...segmentGenerator("src/services/{{pascalCase name}}")].filter(
-      ({ key }) => key !== "ui",
+      ({ key }) => key !== "ui" && key !== "api",
     ),
   });
 };
