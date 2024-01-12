@@ -37,8 +37,10 @@ module.exports = {
   // add rules configurations here
   rules: {
     "import/no-default-export": "off",
+    "no-console": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "unicorn/filename-case": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
     "react/function-component-definition": [
       "error",
       { namedComponents: "arrow-function" },
@@ -96,6 +98,22 @@ module.exports = {
     {
       files: ["src/shared/uikit/**"],
       rules: { "no-restricted-imports": "off" },
+    },
+    {
+      files: ["src/entities/**"],
+      rules: {
+        "no-restricted-imports": [
+          "error",
+          {
+            patterns: [
+              {
+                group: ["@entities/**"],
+                message: "use relative paths",
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       files: ["src/pages/**"],
