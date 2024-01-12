@@ -1,11 +1,8 @@
-import React from 'react';
-
-import ProfilePage from "@/screens/Profile"
+import React from "react";
+import ProfilePage from "@screens/Profile";
 
 const ProfilePageWrapper = () => {
-  return (
-    <ProfilePage />
-  );
+  return <ProfilePage />;
 };
 
 export default ProfilePageWrapper;

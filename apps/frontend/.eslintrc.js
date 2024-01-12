@@ -33,24 +33,43 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: ["node_modules/", "dist/"],
+  ignorePatterns: ["node_modules/", "dist/", ".plop/"],
   // add rules configurations here
   rules: {
     "import/no-default-export": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "unicorn/filename-case": "off",
+    "react/function-component-definition": [
+      "error",
+      { namedComponents: "arrow-function" },
+    ],
 
     "no-restricted-imports": [
       "error",
       {
         patterns: [
           {
-            group: ["@domains/[a-zA-Z]*/**"],
+            group: ["@screens/[a-zA-Z]*/**"],
             message:
               "File not exposed from the module. Consider exporting it from an index",
           },
           {
-            group: ["**/domains/**"],
+            group: ["@screens/*"],
+            message:
+              "File not exposed from the module. Consider exporting it from an index",
+          },
+          {
+            group: ["@mantine/core/**"],
+            message:
+              "No need to use import from ui library - use alias instead - @ui",
+          },
+          {
+            group: ["@mantine/core"],
+            message:
+              "No need to use import from ui library - use alias instead - @ui",
+          },
+          {
+            group: ["**/screens/**"],
             message:
               "No need to use relative imports, use aliases instead - @domains",
           },
@@ -73,4 +92,14 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ["src/shared/uikit/**"],
+      rules: { "no-restricted-imports": "off" },
+    },
+    {
+      files: ["src/pages/**"],
+      rules: { "no-restricted-imports": "off" },
+    },
+  ],
 };

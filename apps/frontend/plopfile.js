@@ -122,7 +122,7 @@ module.exports = (plop) => {
         message: "What is your service name?",
       },
     ],
-    actions: [...segmentGenerator("src/service/{{pascalCase name}}")].filter(
+    actions: [...segmentGenerator("src/services/{{pascalCase name}}")].filter(
       ({ key }) => key !== "ui",
     ),
   });

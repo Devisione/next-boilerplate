@@ -1,12 +1,8 @@
-import React from 'react';
-import Container from "@ui/Container";
+import React from "react";
+import type { FC, PropsWithChildren } from "react";
 
-const LayoutFeature = () => {
-    return (
-        <Container size="xl">
-            Layout
-        </Container>
-    );
+const LayoutFeature: FC<PropsWithChildren> = ({ children }) => {
+  return <div>{children}</div>;
 };
 
 export default LayoutFeature;

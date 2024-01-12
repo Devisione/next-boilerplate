@@ -1,5 +1,13 @@
 import type { AppProps } from "next/app";
+import { MantineProvider, theme } from "@ui/theme";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
-}
+
+const App = ({ Component, pageProps }: AppProps) => {
+  return (
+    <MantineProvider theme={theme}>
+      <Component {...pageProps} />
+    </MantineProvider>
+  );
+};
+
+export default App;
