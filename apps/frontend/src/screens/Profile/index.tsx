@@ -1,12 +1,12 @@
-import React from 'react';
-import Container from "@ui/Container";
+import React from "react";
+import UserAvatar from "@entities/User/ui/Avatar";
 
 const ProfilePage = () => {
-    return (
-        <Container size="xl">
-            Profile
-        </Container>
-    );
+  return (
+    <div>
+      <UserAvatar />
+    </div>
+  );
 };
 
 export default ProfilePage;

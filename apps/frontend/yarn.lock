@@ -254,6 +254,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.56.0.tgz#ef20350fec605a7f7035a01764731b2de0f3782b"
   integrity sha512-gMsVel9D7f2HLkBma9VbtzZRehRogVRfbr++f06nL2vnCGCNlzOD+/MUov/F4p8myyAHspEhVobgjpX64q5m6A==
 
+"@farfetched/core@^0.11.2":
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/@farfetched/core/-/core-0.11.2.tgz#8e17db267efd77e6901065504a0f084df444cb38"
+  integrity sha512-pvdWjEzZwbtGPD+FDap9a+P1wlBZ9ZHnYlvIrVhJer0G8GXJlGDtUHIm519bELV6iMFYRFidC8RBFWWgcnwCWw==
+
 "@floating-ui/core@^1.5.3":
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.5.3.tgz#b6aa0827708d70971c8679a16cf680a515b8a52a"
