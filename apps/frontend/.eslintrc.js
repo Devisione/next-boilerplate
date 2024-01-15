@@ -36,6 +36,7 @@ module.exports = {
   ignorePatterns: ["node_modules/", "dist/", ".plop/"],
   // add rules configurations here
   rules: {
+    "import/order": "off",
     "import/no-default-export": "off",
     "no-console": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
