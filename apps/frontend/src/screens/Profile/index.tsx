@@ -1,10 +1,10 @@
 import React from "react";
-import UserAvatar from "@entities/User/ui/Avatar";
+import { Form } from "./ui";
 
 const ProfilePage = () => {
   return (
     <div>
-      <UserAvatar />
+      <Form />
     </div>
   );
 };
