@@ -111,7 +111,71 @@ module.exports = {
             patterns: [
               {
                 group: ["@entities/**"],
-                message: "use relative paths",
+                message: "dont use another entities in entities",
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      files: ["src/features/**"],
+      rules: {
+        "no-restricted-imports": [
+          "error",
+          {
+            patterns: [
+              {
+                group: ["@features/**"],
+                message: "dont use another features in features",
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      files: ["src/screens/**"],
+      rules: {
+        "no-restricted-imports": [
+          "error",
+          {
+            patterns: [
+              {
+                group: ["@screens/**"],
+                message: "dont use another screen in screens",
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      files: ["src/services/**"],
+      rules: {
+        "no-restricted-imports": [
+          "error",
+          {
+            patterns: [
+              {
+                group: ["@services/**"],
+                message: "dont use another service in services",
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      files: ["src/shared/**"],
+      rules: {
+        "no-restricted-imports": [
+          "error",
+          {
+            patterns: [
+              {
+                group: ["@shared/**"],
+                message: "dont use any shared in shared",
               },
             ],
           },
