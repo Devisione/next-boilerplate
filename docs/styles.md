@@ -51,3 +51,50 @@ const LoginForm = () => {
 
 export default LoginForm;
 ```
+
+### Примеры работы с темой: 
+
+#### **`Внутри метода styled`**
+```typescript filename="styles.ts"
+import styled from "@emotion/styled";
+import Button from "@ui/Button";
+
+export const SubmitButton = styled(Button)`
+    background: #${({ theme }) => theme.colors.dark[1]};
+    color: ${({ theme }) => theme.colors.gray[6]};
+`;
+```
+
+#### **`На уровне компонента`**
+```typescript filename="styles.ts"
+import styled from "@emotion/styled";
+
+export const StyledGrid = styled('p', {
+   shouldForwardProp: (prop) => !["color"].includes(prop),
+})<{ color: string }>`
+   color: ${({ color }) => color};
+`;
+```
+
+```typescript jsx filename="index.tsx"
+import { useMantineTheme } from "@ui/theme";
+
+import type { FC } from "react";
+
+import { StatusIcon } from "./StatusIcon";
+import { StatusText } from "./styles";
+
+const DeliveryStatus:FC<{ isActive: boolean; statusText: string }> = ({ isActive, statusText }) => {
+   const theme = useMantineTheme()
+   const textColor = isActive ? theme.colors.gray[6] : theme.colors.gray[2];
+
+   return (
+      <div>
+          <StatusIcon />
+          <StatusText color={textColor}>{statusText}</StatusText>
+      </div>
+   );
+};
+
+export default LoginForm;
+```
