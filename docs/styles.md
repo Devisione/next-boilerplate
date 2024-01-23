@@ -32,18 +32,22 @@ export const SubmitButton = styled(Button)`
 export const LoginInput = styled.input`
     border-color: red;
 `;
+
+export const PasswordInput = styled.input`
+    border-color: black;
+`;
 ```
 
 #### **`index.tsx`**
 ```typescript jsx filename="index.tsx"
-import { SubmitButton, LoginInput } from "./styles.ts";
+import { SubmitButton, LoginInput, PasswordInput } from "./styles.ts";
 
 const LoginForm = () => {
     
     return (
         <form>
             <LoginInput type="text" name="login" />
-            <input type="password" name="password" />
+            <PasswordInput type="password" name="password" />
             <SubmitButton type="submit">Войти</SubmitButton>
         </form>
     );
@@ -74,6 +78,11 @@ export const StyledGrid = styled('p', {
 })<{ color: string }>`
    color: ${({ color }) => color};
 `;
+
+export const Wrapper = styled.div`
+   display: flex;
+   gap: 4px;
+`;
 ```
 
 ```typescript jsx filename="index.tsx"
@@ -82,17 +91,17 @@ import { useMantineTheme } from "@ui/theme";
 import type { FC } from "react";
 
 import { StatusIcon } from "./StatusIcon";
-import { StatusText } from "./styles";
+import { StatusText, Wrapper } from "./styles";
 
 const DeliveryStatus:FC<{ isActive: boolean; statusText: string }> = ({ isActive, statusText }) => {
    const theme = useMantineTheme()
    const textColor = isActive ? theme.colors.gray[6] : theme.colors.gray[2];
 
    return (
-      <div>
+      <Wrapper>
           <StatusIcon />
           <StatusText color={textColor}>{statusText}</StatusText>
-      </div>
+      </Wrapper>
    );
 };
 
