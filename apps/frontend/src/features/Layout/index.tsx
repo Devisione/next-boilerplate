@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import type { FC, PropsWithChildren } from "react";
-import Button from "@ui/Button";
 import UserAvatar from "@entities/User/ui/Avatar";
 
 const LayoutFeature: FC<PropsWithChildren> = ({ children }) => {
@@ -10,7 +9,7 @@ const LayoutFeature: FC<PropsWithChildren> = ({ children }) => {
       <header>
         <div>
           <Link href="/profile">
-            <Button>text</Button>
+            <button>text</button>
           </Link>
         </div>
         <UserAvatar />

@@ -1,17 +1,9 @@
 import type { AppProps } from "next/app";
 import { EffectorNext } from "@effector/next";
 import { RouterInitialize } from "@services/Router/model";
-import { cache, MantineProvider, theme, useMantineTheme } from "@ui/theme";
 import "@entities/global_stores";
-import type { FC, PropsWithChildren } from "react";
 import type { NextPageWithLayout } from "@features/Layout/model/types";
-import { CacheProvider, ThemeProvider } from "@emotion/react";
 import LayoutFeature from "@features/Layout";
-
-const WrappedApp: FC<PropsWithChildren> = ({ children }) => {
-  const mantineTheme = useMantineTheme();
-  return <ThemeProvider theme={mantineTheme as any}>{children}</ThemeProvider>;
-};
 
 const App = ({
   Component,
@@ -23,13 +15,7 @@ const App = ({
   return (
     <EffectorNext values={pageProps.values}>
       <RouterInitialize />
-      <MantineProvider theme={theme}>
-        <WrappedApp>
-          <CacheProvider value={cache}>
-            {getLayout(<Component {...pageProps} />)}
-          </CacheProvider>
-        </WrappedApp>
-      </MantineProvider>
+      {getLayout(<Component {...pageProps} />)}
     </EffectorNext>
   );
 };

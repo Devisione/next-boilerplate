@@ -1,10 +1,5 @@
 import React from "react";
-import styled from "@emotion/styled";
 
 export const Form = () => {
-  return <RedText>Form</RedText>;
+  return <div>Form</div>;
 };
-
-const RedText = styled.div`
-  color: red;
-`;
