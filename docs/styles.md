@@ -1,109 +1,91 @@
 [← Назад](../README.md)
 
-# Стили
+## Стили
 
-> Для стилизации компонентов используем подход **CSS-in-JS**.
-> В качастве библиотеки реализующей данный подход иcпользуем [Emotion](https://emotion.sh/docs/introduction)
+> Для стилизации компонентов используем метаязык [SCSS]('https://sass-scss.ru/').
+> В качестве подхода организации SCSS кода используем [CSS Modules]('https://github.com/css-modules/css-modules')
 
 ### Правила написания стилей
-1. Для стилизации компонентов создаем отдельный файл **styles.ts** в папке компонента
+1. Для стилизации компонентов создаем отдельный файл **{component-name}.module.scss** в папке компонента
 
    ```
-   └──  LoginForm/
+   └──  ExampleUsageScss/
       ├── index.tsx
-      └── styles.ts
+      ├── index.module.scss
+      ├── mixins.module.scss
+      └── variables.module.scss
    ```
-2. Не используем слово **Styled** в названии стилизованного компонента
-3. Чтобы стилизовать компонент необходимо использовать метод **styled** из библиотеки [@emotion/styled](https://www.npmjs.com/package/@emotion/styled) 
-    
+2. Далее импортируем объект классов `classes` в компонент и присваиваем нужным элементам
 
-### Пример стилизации компонента: 
+### Пример стилизации компонента:
 
-#### **`styles.ts`**
-```typescript filename="styles.ts"
-import styled from "@emotion/styled";
-import Button from "@ui/Button";
+#### **`index.module.scss`**
+```scss filename="index.module.scss"
+@use "./mixins.module";
 
-export const SubmitButton = styled(Button)`
-    background: #333;
-    color: #444;
-`;
+.actionIcon {
+   padding: 20px;
 
-export const LoginInput = styled.input`
-    border-color: red;
-`;
+   @include mixins.button-shadow;
+}
 
-export const PasswordInput = styled.input`
-    border-color: black;
-`;
+.iconDark {
+   color: var(--mantine-color-grape-0);
+   background-color: var(--mantine-color-dark-5);
+}
+
+.iconLight {
+   color: var(--mantine-color-dark-5);
+   background-color: var(--mantine-color-grape-0);
+}
+```
+
+#### **`mixins.module.scss`**
+```scss filename="index.module.ts"
+@use "./variables.module";
+
+@mixin button-shadow {
+   box-shadow: variables.$shadow-action-icon;
+}
+```
+
+#### **`variables.module.scss`**
+```scss filename="variables.module.scss"
+$shadow-action-icon: 10px 10px 5px 0 rgba(0, 0, 0, 0.75);
 ```
 
 #### **`index.tsx`**
 ```typescript jsx filename="index.tsx"
-import { SubmitButton, LoginInput, PasswordInput } from "./styles.ts";
+import { ActionIcon, useMantineColorScheme } from "@mantine/core";
+import { IconSun } from "@tabler/icons-react";
+import { clsx } from "clsx";
+import classes from "./index.module.scss";
 
-const LoginForm = () => {
-    
+export const ExampleUsageScss = () => {
+    const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+
+    const actionIconStyle = clsx({
+        [classes.iconDark]: colorScheme === "dark",
+        [classes.iconLight]: colorScheme === "light",
+    });
+
     return (
-        <form>
-            <LoginInput type="text" name="login" />
-            <PasswordInput type="password" name="password" />
-            <SubmitButton type="submit">Войти</SubmitButton>
-        </form>
+        <ActionIcon
+            className={clsx(classes.actionIcon, actionIconStyle)}
+            onClick={() => {
+                toggleColorScheme();
+            }}
+            title="Toggle color scheme"
+            variant="outline"
+        >
+            <IconSun size="14px" />
+        </ActionIcon>
     );
 };
-
-export default LoginForm;
 ```
 
-### Примеры работы с темой: 
-
-#### **`Внутри метода styled`**
-```typescript filename="styles.ts"
-import styled from "@emotion/styled";
-import Button from "@ui/Button";
-
-export const SubmitButton = styled(Button)`
-    background: #${({ theme }) => theme.colors.dark[1]};
-    color: ${({ theme }) => theme.colors.gray[6]};
-`;
-```
-
-#### **`На уровне компонента`**
-```typescript filename="styles.ts"
-import styled from "@emotion/styled";
-
-export const StyledGrid = styled('p', {
-   shouldForwardProp: (prop) => !["color"].includes(prop),
-})<{ color: string }>`
-   color: ${({ color }) => color};
-`;
-
-export const Wrapper = styled.div`
-   display: flex;
-   gap: 4px;
-`;
-```
-
-```typescript jsx filename="index.tsx"
-import { useMantineTheme } from "@ui/theme";
-
-import type { FC } from "react";
-
-import { StatusIcon } from "./StatusIcon";
-import { StatusText, Wrapper } from "./styles";
-
-const DeliveryStatus:FC<{ isActive: boolean; statusText: string }> = ({ isActive, statusText }) => {
-   const theme = useMantineTheme()
-   const textColor = isActive ? theme.colors.gray[6] : theme.colors.gray[2];
-
-   return (
-      <Wrapper>
-          <StatusIcon />
-          <StatusText color={textColor}>{statusText}</StatusText>
-      </Wrapper>
-   );
-};
-
-export default LoginForm;
-```
+> **Если stylelint не работает!**
+>
+> Убедитесь что в настройках **Webstorm** он включен, указан корректный путь до пакета и
+> регулярное выражение файлов линтинга написано корректно.
+> Если правильные настройки вам не помогли, обновите Webstorm до последней версии.
