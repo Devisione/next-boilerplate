@@ -58,6 +58,9 @@
       "@screens/*": [
         "./src/screens/*"
       ],
+      "@compositions/*": [
+        "./src/compositions/*"
+      ],
       "@shared/*": [
         "./src/shared/*"
       ]
